@@ -161,7 +161,7 @@ def Deserializer(stream_or_string, **options):
             # would be better?
             header = row
             continue
-        d = dict(zip(header[:2], row[:2]))
+        d = dict(zip(header[:2], map(lambda item: item != 'NULL' and item or None ,row[:2])))
         d['fields'] = dict(zip(header[2:], map(process_item, row[2:])))
         data.append(d)
 
